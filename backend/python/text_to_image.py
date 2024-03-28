@@ -19,20 +19,22 @@ pipe.to("cpu")
 # pipe.enable_xformers_memory_efficient_attention()
 
 
-def generate_image():
+# the specified maximum token indices sequence length for this model is 77, make sure our json prompt is within this limit
+# otherwise, part of our input will be truncated because CLIP can only handle sequences up to 77 token
+def generate_image(num):
     # get the path of the current py file
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # append 'img_prompts.json' to get to the json file
-    json_file = os.path.join(current_dir, "img_prompts.json")
+    json_file = os.path.join(current_dir, f'img_prompts{num}.json')
     # check if the json file exists
     if not os.path.exists(json_file):
         print(f"File {json_file} does not exist.")
         return
-    with open('img_prompts.json', 'r') as file:
+    with open(json_file, 'r') as file:
         data = json.load(file)
 
     # create a folder to save the images
-    img_folder = os.path.join(current_dir, "story_images")
+    img_folder = os.path.join(current_dir, f'story_images{num}')
     os.makedirs(img_folder, exist_ok=True)
 
     for index, prompt in enumerate(data['image']):
@@ -44,4 +46,6 @@ def generate_image():
         images.save(image_path)
         print(f"Saved: {image_path}")
 
-generate_image()
+# testing
+generate_image(1)
+generate_image(2)
