@@ -3,6 +3,8 @@ from PIL import Image
 import os
 
 # https://huggingface.co/vikhyatk/moondream2
+# pip install transformers timm einops OR pip3 install transformers timm einops
+
 model_id = "vikhyatk/moondream2"
 revision = "2024-03-13"
 model = AutoModelForCausalLM.from_pretrained(
