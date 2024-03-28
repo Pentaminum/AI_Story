@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .App {
   text-align: center;
 }
@@ -35,4 +39,71 @@
   to {
     transform: rotate(360deg);
   }
+}
+.page-content{
+  background-color: #dbcfbd;
+  color: #161615;
+  border: solid 2px #2f1c03;
+  border-image-slice: 42 42 42 42;
+  border-image-width: 42px 42px 42px 42px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: round round;
+  border-image-source: url("https://mdn.github.io/css-examples/tools/border-image-generator/border-image-6.svg");
+  border-style: solid;
+  height: 100%;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  font-family: 'Lobster', cursive;
+  
+}
+.page-cover-text {
+  padding-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 50px;
+  font-family: 'Cinzel', cursive;
+  text-shadow: 1px 1px 1px #000;
+}
+.pageOne  {
+  background-color: hsl(30, 55%, 83%);
+  color: hsl(35, 35, 35);
+  border: solid 2px #998466;
+  
+}
+.page-intro-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 60px;
+}
+.page-text{
+  padding-top: 30px;
+  text-align: left;
+  padding-left: 30px;
+  line-height: 1.5;
+  letter-spacing: 1.7px;
+  padding-right: 20px;
+  text-shadow: 1px 1px 1px #000;
+  font-family: 'Cinzel', cursive;
+  font-size: 20px;
+}
+.page-footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+}
+
+.question {
+  padding-top: 40px;
+  text-align: left;
+  padding-left: 30px;
+  line-height: 1.5;
+  letter-spacing: 1.7px;
+  padding-right: 20px;
+  text-shadow: 1px 1px 1px #000;
+  font-family: 'Cinzel', cursive;
+  font-size: 20px;
 }

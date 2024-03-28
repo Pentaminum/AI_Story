@@ -4,7 +4,7 @@ import os
 
 # https://huggingface.co/vikhyatk/moondream2
 model_id = "vikhyatk/moondream2"
-revision = "2024-03-06"
+revision = "2024-03-13"
 model = AutoModelForCausalLM.from_pretrained(
     model_id, trust_remote_code=True, revision=revision
 )
