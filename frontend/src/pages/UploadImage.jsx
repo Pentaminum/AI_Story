@@ -1,38 +1,48 @@
-// Page1.jsx
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const UploadImage = React.forwardRef(({ number, textContent, children }, ref) => {
-  // State to store uploaded images
   const [images, setImages] = useState([]);
 
-  // Function to handle image upload
   const handleImageUpload = (event) => {
-    const file = event.target.files[0]; // Get the first file from the uploaded files
-    const reader = new FileReader(); // Create a FileReader object
-    reader.onload = () => {
-      const imageData = reader.result; // Get the image data as base64
-      // Save the image data into the state
-      setImages([...images, imageData]);
-    };
-    // Read the uploaded file as data URL
-    reader.readAsDataURL(file);
+    const file = event.target.files[0];
+    if (images.length < 3) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageData = reader.result;
+        localStorage.setItem(`uploadedImage_${number}`, imageData);
+        setImages([...images, imageData]);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert('You can only upload up to 3 images.');
+    }
   };
 
   return (
     <div className="pageOne" ref={ref}>
-      <h2 className="page-header">Page {number}</h2>
-      <div className="page-text">Upload your 3 chosen images!</div>
-      {/* Display uploaded images */}
-      {images.map((image, index) => (
-        <img key={`image${index}`} src={image} alt={`Image ${index + 1}`} />
-      ))}
-<div className="page-text">
-      {/* Image upload input */}
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
-      </div>
-      <div className="page-text">{textContent}</div>
-      <div className="page-footer">{number}</div>
-      {children}
+        <div className='page-intro-text'>Visualize your story</div>
+        <div className="page-text">Upload your chosen images!</div>
+         {/* Display number of images uploaded */}
+         {images.length > 0 && <div className="page-text">{images.length} image{images.length === 1 ? '' : 's'} uploaded!</div>}
+        {/* Display uploaded images */}
+        <div className="image-container">
+        {images.map((image, index) => (
+            <img key={`image${index}`} src={image} alt={`Image ${index + 1}`} className="uploaded-image" />
+          ))}
+        </div>
+        <div className="page-text">
+          {/* Styled file input button */}
+          <label className='button'>
+            Choose File
+            <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
+          </label>
+        </div>
+        
+        <div className="page-text">{textContent}</div>
+        <div className="page-footer">{number}</div>
+        {children}
+      
     </div>
   );
 });

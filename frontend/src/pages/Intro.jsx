@@ -1,10 +1,9 @@
 // Page.jsx
 import React from 'react';
-import pageImage from '../utils/page.jpg';
+
 const Page = React.forwardRef(({ number, imageSrc, textContent, children }, ref) => (
   <div className="pageOne" ref={ref}>
     
-      <h2 className="page-header">Page {number}</h2>
 
       <div className="page-intro-text">Once Upon A Time...</div>
       <div className="page-text">An adventure began... <br></br> <br></br> 

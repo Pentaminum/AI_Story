@@ -7,7 +7,7 @@ import Intro from './Intro';
 import StoryFlow from './StoryFlow';
 import QuestionPage from './QuestionPage';
 import React, { useRef, useState, useEffect } from 'react';
-import pageImage from '../utils/page.jpg';
+
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -45,20 +45,20 @@ function MainPage(props) {
         <Wrapper>
             
             <NavigationWrapper>
-                <button onClick={handleResetButtonClick}>Reset to Start</button>
-                <span>Page {currentPage + 1} of {totalPages}</span>
-                <button onClick={handleNextButtonClick}>Next</button>
+               
+                <div className='button-container'>Page {currentPage + 1} of {totalPages}
+                <button className='button' onClick={handleNextButtonClick}>Next</button>
+                </div>
             </NavigationWrapper>
                 <HTMLFlipBook 
-                    width={550} // Set to a fixed width that works for your layout
-                    height={670}
+                    width={500} // Set to a fixed width that works for your layout
+                    height={600}
                     minWidth={315}
                     maxWidth={1000} // You can adjust maxWidth to ensure single-page mode if supported
                     minHeight={400}
                     maxHeight={1533}
                     size="stretch"
                     disableFlipByClick
-
                     showCover={true}
                     mobileScrollSupport={true}
                     onFlip={(e) => setCurrentPage(e.data)}

@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Kanit:900');
 .App {
   text-align: center;
 }
@@ -44,45 +45,55 @@
   background-color: #dbcfbd;
   color: #161615;
   border: solid 2px #2f1c03;
-  border-image-slice: 42 42 42 42;
+  /* border-image-slice: 42 42 42 42;
   border-image-width: 42px 42px 42px 42px;
   border-image-outset: 0px 0px 0px 0px;
   border-image-repeat: round round;
   border-image-source: url("https://mdn.github.io/css-examples/tools/border-image-generator/border-image-6.svg");
+   */
+   background-image: url('./utils/cover1.jpg');
+   background-size: cover;
   border-style: solid;
   height: 100%;
-  background-size: contain;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   font-family: 'Lobster', cursive;
   
 }
 .page-cover-text {
-  padding-top: 40px;
+  padding-top: 100px;
   padding-left: 30px;
   padding-right: 30px;
   font-size: 50px;
-  font-family: 'Cinzel', cursive;
-  text-shadow: 1px 1px 1px #000;
+  font-family: 'Abril Fatface';
+  text-shadow: 5px 5px 5px #272625;
+  display: inline-block;
+  color: rgba(199, 173, 152, 0.979);
+  font-size: 50px;
 }
+
 .pageOne  {
-  background-color: hsl(30, 55%, 83%);
-  color: hsl(35, 35, 35);
+  background-image: url('./utils/page7.jpg');
+  background-size: cover;
+  background-position: center center;
   border: solid 2px #998466;
-  
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* The entire image will fit within the frame */
 }
 .page-intro-text {
   font-family: 'Great Vibes', cursive;
   font-size: 60px;
+  padding-top: 70px;
 }
 .page-text{
-  padding-top: 30px;
+  padding-top: 40px;
   text-align: left;
-  padding-left: 30px;
+  padding-left: 90px;
   line-height: 1.5;
   letter-spacing: 1.7px;
-  padding-right: 20px;
-  text-shadow: 1px 1px 1px #000;
+  padding-right: 70px;
+  font-weight: bold;
   font-family: 'Cinzel', cursive;
   font-size: 20px;
 }
@@ -97,13 +108,93 @@
 }
 
 .question {
-  padding-top: 40px;
+  padding-top: 30px;
   text-align: left;
   padding-left: 30px;
   line-height: 1.5;
   letter-spacing: 1.7px;
   padding-right: 20px;
-  text-shadow: 1px 1px 1px #000;
+  font-weight: bold;
   font-family: 'Cinzel', cursive;
   font-size: 20px;
+}
+.button-container {
+  font-family: 'Cinzel', cursive;
+  height: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button{
+  padding: 10px 20px;
+  font-family: 'Cinzel', cursive;
+  
+    border: none;
+    border-radius: 30px; /* Adjust the border radius as needed */
+    background-color: #b49770; /* Green */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 0 2px #4d3305, 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.button:active {
+  transform: translateY(2px); /* Move button slightly down when clicked */
+}
+.image-container {
+  margin-top: 10px;
+}
+
+.uploaded-image {
+  max-width: 100px;
+  max-height: 100px;
+  margin-right: 10px;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  padding: 3px 8px;
+  font-size: 15px;
+  border: 3px solid #4e3e3e;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #d4be9d;
+  color: #333;
+}
+
+.dropdown-toggle:hover {
+  background-color: #e5c7a0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  font-size: 15px;
+  font-family: 'Cinzel';
+  left: 0;
+  background-color: #eedbc6;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  list-style-type: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
 }
