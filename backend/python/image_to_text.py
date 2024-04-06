@@ -13,22 +13,21 @@ model = AutoModelForCausalLM.from_pretrained(
 tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
 
 
-def process_images(num):
+def process_images():
     # get the path of the current py file
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # append 'images' to get to the images folder
-    img_folder = os.path.join(current_dir, f'images{num}')
+    img_folder = os.path.join(current_dir, 'user_uploaded_images')
+    description_file = os.path.join(current_dir, 'description.txt')
 
     question = "Describe this image in detail."
-    # question = "Describe this image with detailed context, including objects, people, background elements, colors, textures, emotions, and any symbols or text present."
-    description_file = os.path.join(current_dir, f'description{num}.txt')
 
     # check if the folder exists
     if not os.path.exists(img_folder):
         print(f"Folder {img_folder} does not exist.")
         return
 
-    # open the description file for writing
+    # open the description file for writing - overwrites the file if it exists
     with open(description_file, 'w') as file:
         # iterate over each file in the image folder
         for filename in os.listdir(img_folder):
@@ -43,10 +42,20 @@ def process_images(num):
                     # ask the model a question about the image
                     answer = model.answer_question(enc_image, question, tokenizer)
                     # write the answer to the description file
-                    file.write(f"{answer}\n\n")
+                    file.write(f"{answer}\n")
                 except Exception as e:
                     print(f"Failed to process {filename}: {e}")
+    delete_images(img_folder)
+
+def delete_images(img_folder):
+    # delete images after writing descriptions 
+    for filename in os.listdir(img_folder):
+        file_path = os.path.join(img_folder, filename)
+        try:
+            os.remove(file_path)
+        except Exception as e:
+            print(f"Failed to delete {filename}: {e}")
+                    
 
 # testing
-process_images(1)
-process_images(2)
+process_images()

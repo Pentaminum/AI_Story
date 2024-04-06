@@ -21,11 +21,11 @@ pipe.to("cpu")
 
 # the specified maximum token indices sequence length for this model is 77, make sure our json prompt is within this limit
 # otherwise, part of our input will be truncated because CLIP can only handle sequences up to 77 token
-def generate_image(num):
+def generate_image():
     # get the path of the current py file
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # append 'img_prompts.json' to get to the json file
-    json_file = os.path.join(current_dir, f'img_prompts{num}.json')
+    json_file = os.path.join(current_dir, f'img_prompts.json')
     # check if the json file exists
     if not os.path.exists(json_file):
         print(f"File {json_file} does not exist.")
@@ -34,18 +34,29 @@ def generate_image(num):
         data = json.load(file)
 
     # create a folder to save the images
-    img_folder = os.path.join(current_dir, f'story_images{num}')
+    img_folder = os.path.join(current_dir, 'ai_generated_images')
     os.makedirs(img_folder, exist_ok=True)
+    delete_images(img_folder)
 
     for index, prompt in enumerate(data['image']):
         # generate an image for the current prompt
         images = pipe(prompt=prompt).images[0]
         # get the path to save the image
-        image_path = os.path.join(img_folder, f"generated_image_{index}.png")
+        image_path = os.path.join(img_folder, f"image_{index}.png")
         # save the image
         images.save(image_path)
-        print(f"Saved: {image_path}")
+    
+    os.remove(json_file)
+
+def delete_images(img_folder):
+    # delete images after writing descriptions 
+    for filename in os.listdir(img_folder):
+        file_path = os.path.join(img_folder, filename)
+        try:
+            os.remove(file_path)
+        except Exception as e:
+            print(f"Failed to delete {filename}: {e}")
+                    
 
 # testing
-generate_image(1)
-generate_image(2)
+generate_image()
