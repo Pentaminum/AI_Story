@@ -9,7 +9,7 @@ const Page = React.forwardRef(({ number, imageSrc, textContent, children }, ref)
     { question: "What will be your story's theme?", options: ['Fantasy', 'Mystery', 'Horror', 'Comedy'] },
     { question: "What is your preferred setting?", options: ['City', 'Forest', 'Space', 'Underwater'] },
     { question: "Choose your protagonist's main trait", options: ['Brave', 'Cunning', 'Compassionate', 'Mysterious'] },
-    { question: "Select the primary conflict", options: ['Man vs Man', 'Man vs Nature', 'Man vs Society', 'Man vs Self'] }
+    { question: "Select the primary conflict", options: ['Quest', 'Villain', 'Battle', 'Betrayal', 'Curse'] }
   ];
 
   const handleOptionChange = (question, value) => {

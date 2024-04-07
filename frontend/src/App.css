@@ -61,6 +61,16 @@
   font-family: 'Lobster', cursive;
   
 }
+.story-cover{
+  background-image: url('./utils/cover4.jpg');
+  background-size: cover;
+ border-style: solid;
+ height: 100%;
+ background-size: cover;
+ background-position: center center;
+ background-repeat: no-repeat;
+ font-family: 'Lobster', cursive;
+}
 .page-cover-text {
   padding-top: 100px;
   padding-left: 30px;
@@ -197,4 +207,26 @@
 
 .dropdown-menu li:hover {
   background-color: #f0f0f0;
+}
+.upload-button{
+  padding-top: 20px;
+  padding: 10px 20px;
+  font-family: 'Cinzel', cursive;
+  
+    border: none;
+    border-radius: 10px; 
+    background-color: #8fb470; /* Green */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 0 2px #4d3305, 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.uploadbutton-container{
+  padding-top: 50px;
 }

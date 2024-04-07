@@ -35,7 +35,8 @@ function MainPage(props) {
         if (currentPage < totalPages - 1) {
             setCurrentPage(currentPage + 1);
             flipBookRef.current.pageFlip().flipNext();
-        }
+            
+        }   
     };
     const handleResetButtonClick = () => {
         setCurrentPage(0); // Resets the current page state to 0
@@ -70,7 +71,7 @@ function MainPage(props) {
                         <UploadImage  number={2} />
                         <QuestionPage  number={3} />
                         <StoryFlow  number={4} />
-                        <PageCover>The End</PageCover>
+                        {/* <PageCover>The End</PageCover> */}
                 </HTMLFlipBook>
                
             </Wrapper>

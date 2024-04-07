@@ -7,5 +7,8 @@
     "react-pageflip": "^2.0.3",
     "react-router-dom": "^6.22.3",
     "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
