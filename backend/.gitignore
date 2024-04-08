@@ -23,4 +23,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/python/user_uploaded_imges/
+/python/user_uploaded_images
+/python/ai_generated_images
