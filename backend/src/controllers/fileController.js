@@ -3,11 +3,24 @@ const { generateStory } = require('./chatGptController');
 const { PythonShell } = require('python-shell');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const fs = require('fs');
 
 
 
 const uploadImages = async (req, res) =>{
     try{
+        // Ensure the directory exists
+        const uploadDir = path.join(__dirname, '../../python/user_uploaded_images/');
+        for (const file of req.files.images) {
+            const newName = Date.now() + '-' + file.name; // Adding timestamp to avoid overwriting files with same name
+            const newPath = path.join(uploadDir, newName);
+            file.mv(newPath, (err) => {
+                if (err) {
+                    throw new Error('Failed to move file');
+                }
+            });
+        }
+
         res.status(200).json({
             message: "Images uploaded successfully"
         })
