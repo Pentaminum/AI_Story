@@ -12,14 +12,24 @@ const generateStory = async (story_settings) => {
         const prompt = `Given the story settings: \n 
         [ 
             "base image descriptions":${story_settings.image_description},
-            "theme":${story_settings.theme},
-            "place setting":${story_settings.place_setting},
+            "story theme":${story_settings.theme},
+            "place setting":${story_settings.place},
             "protagonist's main trait":${story_settings.main_trait},
             "primary conflict":${story_settings.conflict},
 
         ] \n 
-        1. create a story based on the given settings.(500~1000 words) \n
-        2. create 3 descriptions(around 50 words) depicting the important scenes from the story you created, enabling us to draw corresponding images with them later.
+        1. create a short full story based on the given settings.(500~1000 English words) \n
+        2. create 3 descriptions(around 50 English words) depicting the important scenes from the story you created, enabling us to draw corresponding images with them later.
+        
+        put your answer in this JSON format:\n
+        {
+            "story": "your story here",
+            "scenes": [
+                "scene1", 
+                "scene2", 
+                "scene3"
+            ]
+        }
         `;
 
         const response = await openai.chat.completions.create({

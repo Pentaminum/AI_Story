@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
-const { uploadImages, readImages } = require('./src/controllers/fileController');
+const { uploadImages, uploadSettings, readImages } = require('./src/controllers/fileController');
 
 const app = express();
 app.use(cors());
@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
 
 // send images/data to server
 app.post('/upload/images', uploadImages);
+
+app.post('/upload/settings', uploadSettings);
+
+app.get("get/story")
 
 app.get('/read/images', readImages);
 

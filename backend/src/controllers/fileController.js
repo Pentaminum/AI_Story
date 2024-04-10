@@ -2,10 +2,7 @@ const express = require('express');
 const { generateStory } = require('./chatGptController');
 const { PythonShell } = require('python-shell');
 const path = require('path');
-const { spawnSync } = require('child_process');
 const fs = require('fs');
-
-
 
 const uploadImages = async (req, res) =>{
     try{
@@ -19,7 +16,6 @@ const uploadImages = async (req, res) =>{
                 }
             });
         }
-
         res.status(200).json({
             message: "Images uploaded successfully"
         })
@@ -32,27 +28,62 @@ const uploadImages = async (req, res) =>{
 
 const readImages = async (req, res) => {
     try {
-        const pipenvInstall = spawnSync('pipenv', ['install'], { stdio: 'inherit' });
-
-        if (pipenvInstall.status !== 0) {
-            throw new Error('Failed to install Python dependencies');
-        }
         const options = {
             scriptPath: path.join(__dirname, '../../python/'),
-            args: [],
-        }
+        };
 
-        await PythonShell.run("image_to_text.py", options);
-        res.status(200).json({ message: 'Images read successfully' });
+        const result = await PythonShell.run('image_to_text.py', options);
+        res.status(200).json({
+            message: result
+        });
+
     } catch (error) {
         console.error(`Error while reading images: ${error.message}`);
         res.status(400).json({ message: 'Error while reading images' });
     }
 };
 
+const uploadSettings = async (req, res) => {
+    try {
+        const { theme, place, main_trait, conflict } = req.body;
+        try{
+            // Read the contents of description.txt
+            const descriptionFilePath = path.join(__dirname, '../../python/description.txt');
+            const lines = await fs.promises.readFile(descriptionFilePath, 'utf8');
+            const result = await generateStory({
+                body: {
+                    image_description : lines.split('\n'),
+                    theme: theme,
+                    place: place,
+                    main_trait: main_trait,
+                    conflict: conflict,
+                },
+            });
+            console.log(result);
+            return res.status(200).send({result});
+        } catch (error) {
+            console.error('Error while generating stories:', error);
+            return res.status(500).send('Error generating stories: ', error.message);
+        };
+    } catch (error) {
+        res.status(400).json({
+            message: ("Error while uploading settings: ", error.message)
+        })
+    }
+};
 
+const getStory = async (req, res) => {
+    try {
+        const storyFilePath = path.join(__dirname, '../../python/story.txt');
+        const story = await fs.prom
+    } catch (error) {
+        console.error('Error while reading story:', error);
+        return res.status(500).send('Error reading story:', error.message);
+    }
+};
 
 module.exports = {
     uploadImages,
-    readImages
+    readImages,
+    uploadSettings
 };
