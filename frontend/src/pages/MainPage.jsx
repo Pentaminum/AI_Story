@@ -48,7 +48,7 @@ function MainPage(props) {
             <NavigationWrapper>
                
                 <div className='button-container'>Page {currentPage + 1} of {totalPages}
-                <button className='button' onClick={handleNextButtonClick}>Next</button>
+                <button className='button' onClick={handleNextButtonClick} disabled={currentPage === 3}>Next</button>
                 </div>
             </NavigationWrapper>
                 <HTMLFlipBook 

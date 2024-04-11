@@ -1,16 +1,16 @@
 {
-  "title": "The Lost Treasure of Atlantis",
+  "title": "The Forgotten Garden",
   "story": {
-    "1": "In a small coastal town, a young archaeologist named Lily stumbles upon an ancient map that leads to the lost city of Atlantis. Determined to uncover its secrets, she embarks on a perilous journey to find the legendary treasure.",
+    "1": "In a small village at the edge of a deep forest, there was a forgotten garden hidden behind tall overgrown bushes. No one knew who the garden belonged to or why it had been abandoned. The villagers whispered stories of magic and curses surrounding the mysterious garden, and most avoided going near it.",
     "2": {
-      "middle": "As Lily delves deeper into the underwater ruins of Atlantis, she faces challenges and traps set by ancient guardians to protect the treasure. Along the way, she befriends a mysterious mermaid who guides her through the treacherous waters.",
-      "climax": "After overcoming numerous obstacles, Lily finally reaches the heart of Atlantis where the treasure is said to be hidden. However, she is confronted by a rival treasure hunter who will stop at nothing to claim the riches for himself. A thrilling underwater battle ensues as Lily fights to protect the treasure."
+      "middle": "One day, a young girl named Elara stumbled upon the forgotten garden while playing in the forest. Intrigued by the colorful flowers and twisted vines, she decided to explore further. As she wandered deeper into the garden, she discovered a weathered stone statue of a woman with a sad expression. Elara felt a strange connection to the statue and vowed to uncover the secrets of the garden.",
+      "climax": "As Elara delved into the history of the garden, she learned that it once belonged to a powerful sorceress who had disappeared many years ago. Legend had it that the sorceress had cast a spell to protect her garden from intruders but had accidentally trapped herself inside it. Determined to free the sorceress, Elara searched for clues and finally found the key to breaking the spell. With a trembling hand, she uttered the incantation and watched in awe as the garden shimmered with magic."
     },
-    "3": "In the end, Lily emerges victorious, having outwitted her rival and secured the lost treasure of Atlantis. With the help of her new mermaid friend, she safely returns to the surface, where she is hailed as a hero for her incredible discovery."
+    "3": "In a blinding flash of light, the sorceress emerged from the stone statue, her eyes filled with gratitude. She thanked Elara for releasing her from the enchantment and promised to repay her kindness. The once-forgotten garden bloomed with renewed vigor, filling the village with enchanting beauty. Elara had not only unlocked the secret of the garden but had also gained a lifelong friend in the sorceress, who became her mentor in the ways of magic."
   },
   "image": {
-    "1": "Lily examining the ancient map with a look of excitement and determination on her face.",
-    "2": "Lily and the mermaid navigating through the intricate ruins of Atlantis, surrounded by glowing underwater flora.",
-    "3": "Lily standing triumphantly on the shore, holding the recovered treasure chest as the sun sets over the horizon."
+    "1": "The overgrown bushes conceal the entrance to the mysterious garden, with colorful flowers peeking through the foliage.",
+    "2": "Elara gazes in wonder at the weathered stone statue of the sorceress, her curiosity piqued by the garden's secrets. The climax scene shows Elara standing in front of the shimmering garden, reciting the incantation to free the sorceress from her enchantment.",
+    "3": "The sorceress emerges from the stone statue, her expression grateful and kind, as Elara watches in astonishment. The once-forgotten garden now thrives with vibrant colors and magical energy, a testament to Elara's bravery and compassion."
   }
 }

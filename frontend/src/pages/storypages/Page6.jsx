@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Page2 = React.forwardRef(({ number = 1, children }, ref) => {
+const Page2 = React.forwardRef(({ number = 3, children }, ref) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     const fetchImageData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/imagenum/1`);
+        const response = await fetch(`http://localhost:4000/imagenum/3`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

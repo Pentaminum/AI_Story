@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Page1 = React.forwardRef(({ number = 1, children }, ref) => {
+const Page5 = React.forwardRef(({ number = 3, children }, ref) => {
   const [storyData, setStoryData] = useState({
     story: ''
   });
@@ -9,7 +9,7 @@ const Page1 = React.forwardRef(({ number = 1, children }, ref) => {
   useEffect(() => {
     const fetchStoryData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/storynum/1`);
+        const response = await fetch(`http://localhost:4000/storynum/3`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -25,14 +25,13 @@ const Page1 = React.forwardRef(({ number = 1, children }, ref) => {
 
   return (
     <div className="storyPage" ref={ref}>
-      <div class="story-container">
-      <div className='story-text'>{storyData.story}</div> {/* Display the story content */}
+         <div class="story-container">
+      <div className='story-text'>{storyData.story} </div> {/* Display the story content */}
       </div>
       <div className="page-footer">{number}</div>
       {children}
-      
     </div>
   );
 });
 
-export default Page1;
+export default Page5;

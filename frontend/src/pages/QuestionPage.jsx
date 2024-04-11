@@ -1,43 +1,46 @@
 import React, { useState } from 'react';
-// Assuming you've already set up the necessary backend and fetch setup
 
 const Page = React.forwardRef(({ number, imageSrc, textContent, children }, ref) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState({});
   const [answers, setAnswers] = useState({});
   const [isSaved, setIsSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  
   const questionsWithOptions = [
-    { question: "What will be your story's theme?", options: ['Fantasy', 'Mystery', 'Horror', 'Comedy'] },
-    { question: "What is your preferred setting?", options: ['City', 'Forest', 'Space', 'Underwater'] },
-    { question: "Choose your protagonist's main trait", options: ['Brave', 'Cunning', 'Compassionate', 'Mysterious'] },
-    { question: "Select the primary conflict", options: ['Quest', 'Villain', 'Battle', 'Betrayal', 'Curse'] }
+    { key: 'theme', question: "What will be your story's theme?", options: ['Fantasy', 'Mystery', 'Horror', 'Comedy'] },
+    { key: 'place', question: "What is your preferred setting?", options: ['City', 'Forest', 'Space', 'Underwater'] },
+    { key: 'main_trait', question: "Choose your protagonist's main trait", options: ['Brave', 'Cunning', 'Compassionate', 'Mysterious'] },
+    { key: 'conflict', question: "Select the primary conflict", options: ['Quest', 'Villain', 'Battle', 'Betrayal', 'Curse'] }
   ];
 
-  const handleOptionChange = (question, value) => {
-    setAnswers({ ...answers, [question]: value });
-    setIsDropdownOpen({ ...isDropdownOpen, [question]: false });
+  const handleOptionChange = (key, value) => {
+    setAnswers({ ...answers, [key]: value });
+    setIsDropdownOpen({ ...isDropdownOpen, [key]: false });
   };
 
   const saveAnswersToBackend = () => {
     if (Object.keys(answers).length === questionsWithOptions.length) {
+      setIsSaving(true);
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(answers)
       };
 
-      fetch('http://yourserver.com/api/saveAnswers', requestOptions)
+      fetch('http://localhost:4000/upload/settings', requestOptions)
         .then(response => response.json())
         .then(data => {
           console.log("Response from server:", data);
+          setIsSaving(false);
           setIsSaved(true); // Update state to indicate the answers are saved
         })
         .catch(error => {
+          console.log(answers);
+          setIsSaving(false);
           console.error('There was an error!', error);
-          // setIsSaved(true);
-          console.error('Answers: ', answers);
         });
     } else {
-      console.log("Please answer all questions before saving.");
+      alert("Please answer all questions before saving.");
     }
   }; 
 
@@ -46,17 +49,17 @@ const Page = React.forwardRef(({ number, imageSrc, textContent, children }, ref)
       <div className='page-intro-text'>Choose your adventure...</div>
 
       {questionsWithOptions.map((item, index) => (
-        <div className="question" style={{ textAlign: 'center', marginTop: index > 0 ? '20px' : '0' }} key={item.question}>
+        <div className="question" style={{ textAlign: 'center', marginTop: index > 0 ? '20px' : '0' }} key={item.key}>
           {item.question}
           <br />
           <div className="dropdown">
-            <div className="dropdown-toggle" onClick={() => setIsDropdownOpen({ ...isDropdownOpen, [item.question]: !isDropdownOpen[item.question] })}>
-              {answers[item.question] || 'Select an option'}
+            <div className="dropdown-toggle" onClick={() => setIsDropdownOpen({ ...isDropdownOpen, [item.key]: !isDropdownOpen[item.key] })}>
+              {answers[item.key] || 'Select an option'}
             </div>
-            {isDropdownOpen[item.question] && (
+            {isDropdownOpen[item.key] && (
               <ul className="dropdown-menu">
                 {item.options.map((option, optionIndex) => (
-                  <li key={optionIndex} onClick={() => handleOptionChange(item.question, option)}>
+                  <li key={optionIndex} onClick={() => handleOptionChange(item.key, option)}>
                     {option}
                   </li>
                 ))}
@@ -66,8 +69,13 @@ const Page = React.forwardRef(({ number, imageSrc, textContent, children }, ref)
         </div>
       ))}
 
-      <button className='button' onClick={saveAnswersToBackend} disabled={isSaved} style={{ marginTop: '20px' }}>Save All Answers</button>
-
+<button className='button' onClick={saveAnswersToBackend} disabled={isSaving || isSaved} style={{ marginTop: '20px' }}>
+        {isSaving ? 'Saving...' : 'Save All Answers'}
+      </button>
+      {isSaved && !isSaving && (
+        <div className='text'>Answers Saved!</div>
+      )}
+      
       <div className="page-footer">{number}</div>
       {children}
     </div>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const UploadImage = React.forwardRef(({ number, textContent, children }, ref) => {
   const [images, setImages] = useState([]);
   const [files, setFiles] = useState([]); // State to store the file objects
+  const [isSaved, setIsSaved] = useState(false);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -37,9 +38,12 @@ const UploadImage = React.forwardRef(({ number, textContent, children }, ref) =>
       });
       console.log('Upload successful:', response.data);
       // Clear images and files state after successful upload, or handle as needed
-      setImages([]);
-      setFiles([]);
+      // set choose file to disabled
+      setIsSaved(true);
+      // setImages([]);
+      // setFiles([]);
     } catch (error) {
+      //setIsSaved(true);
       console.error('Error uploading images:', error);
       // Handle error as needed
     }
@@ -64,20 +68,24 @@ const UploadImage = React.forwardRef(({ number, textContent, children }, ref) =>
         </div>
         <div className="page-text">
           {/* Styled file input button */}
-          <label className='button'>
+          {!isSaved &&(<label className='button' >
             Choose File
-            <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
+            <input type="file" accept="image/*"  onChange={handleImageUpload} style={{ display: 'none' }} />
             
-          </label>
+          </label>)}
         <div className='uploadbutton-container'>
-          {files.length > 0 && (
+          {files.length > 0 && !isSaved &&(
           <button onClick={uploadImages} className="upload-button">
             Submit Images
           </button>
         )}
        </div>
         </div>
-        
+        {isSaved &&(
+          <div className='text'>
+            Uploaded!
+          </div>
+        )}
         <div className="page-text">{textContent}</div>
         <div className="page-footer">{number}</div>
         {children}
