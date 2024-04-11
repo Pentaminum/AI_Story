@@ -26,25 +26,24 @@ const uploadImages = async (req, res) =>{
     }
 }
 
-const readImages = async (req, res) => {
+const readImages = async () => {
     try {
         const options = {
             scriptPath: path.join(__dirname, '../../python/'),
         };
 
-        const result = await PythonShell.run('image_to_text.py', options);
-        res.status(200).json({
-            message: result
-        });
+        const result = await PythonShell.run('a.py', options);
+        return result;
 
     } catch (error) {
-        console.error(`Error while reading images: ${error.message}`);
-        res.status(400).json({ message: 'Error while reading images' });
+        return error;
     }
 };
 
 const uploadSettings = async (req, res) => {
     try {
+        const result = await readImages();
+        console.log('Result:', result);
         const { theme, place, main_trait, conflict } = req.body;
         try{
             // Read the contents of description.txt
@@ -59,7 +58,25 @@ const uploadSettings = async (req, res) => {
                     conflict: conflict,
                 },
             });
-            console.log(result);
+            const storyString = JSON.stringify(result, null, 2);
+            // Transform the object values into an array
+            const imageArray = Object.values(result.image);
+            const imageObject = { image: imageArray };
+            const imageString = JSON.stringify(imageObject, null, 2);
+            fs.writeFile(path.join(__dirname, '../../python/story.json'), storyString, 'utf8', (err) => {
+                if (err) {
+                    console.error('Error writing story to file:', err);
+                    return;
+                }
+                console.log('JSON file has been saved.');
+            });
+            fs.writeFile(path.join(__dirname, '../../python/img_prompts.json'), imageString, 'utf8', (err) => {
+                if (err) {
+                    console.error('Error writing image_prompts to file:', err);
+                    return;
+                }
+                console.log('JSON file has been saved.');
+            });
             return res.status(200).send({result});
         } catch (error) {
             console.error('Error while generating stories:', error);
@@ -75,7 +92,6 @@ const uploadSettings = async (req, res) => {
 const getStory = async (req, res) => {
     try {
         const storyFilePath = path.join(__dirname, '../../python/story.txt');
-        const story = await fs.prom
     } catch (error) {
         console.error('Error while reading story:', error);
         return res.status(500).send('Error reading story:', error.message);

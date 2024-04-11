@@ -17,11 +17,9 @@ app.get('/', (req, res) => {
 
 // send images/data to server
 app.post('/upload/images', uploadImages);
-
 app.post('/upload/settings', uploadSettings);
 
-app.get("get/story")
-
+// text -> image // image -> text
 app.get('/read/images', readImages);
 
 app.listen(PORT, () => {
