@@ -89,17 +89,79 @@ const uploadSettings = async (req, res) => {
     }
 };
 
+const storyReady = async (req, res) => {
+    try {
+
+    } catch (error) {
+        console.error('Error while getting story:', error);
+        return res.status(500).send('Error getting story:', error.message);
+    }
+};
+
 const getStory = async (req, res) => {
     try {
-        const storyFilePath = path.join(__dirname, '../../python/story.txt');
+        const storynum = parseInt(req.params.num); 
+        const validStoryNumbers = [1, 2, 3];
+        if (!validStoryNumbers.includes(storynum)) { 
+            return res.status(400).send('Invalid story number');
+        }
+        const storyFilePath = path.join(__dirname, '../../python/story.json');
+        const jsonData = fs.readFileSync(storyFilePath, 'utf8');
+        const storyObject = JSON.parse(jsonData);
+
+        let story;
+        if (storynum === 2) {
+            story = storyObject.story["2"].middle + " " + storyObject.story["2"].climax;
+        } else {
+            story = storyObject.story[storynum.toString()];
+        }
+
+        return res.status(200).send({ story });
     } catch (error) {
-        console.error('Error while reading story:', error);
-        return res.status(500).send('Error reading story:', error.message);
+        console.error('Error while getting story:', error);
+        return res.status(500).send('Error getting story:', error.message);
+    }
+};
+
+const getImage = async (req, res) => {
+    try {
+        const imagenum = parseInt(req.params.num); 
+        const validImageNumbers = [1, 2, 3];
+        if (!validImageNumbers.includes(imagenum)) { 
+            return res.status(400).send('Invalid image number');
+        }
+        const imageFilePath = path.join(__dirname, '../../python/ai_generated_images/');
+        const imageFileName = `image_${imagenum - 1}.png`;
+
+        const imageData = fs.readFileSync(path.join(imageFilePath, imageFileName));
+        res.contentType('image/png'); 
+
+        return res.status(200).send(imageData );
+    } catch (error) {
+        console.error('Error while getting image:', error);
+        return res.status(500).send('Error getting image:', error.message);
+    }
+};
+
+const getTitle = async (req, res) => {
+    try {
+        const storyFilePath = path.join(__dirname, '../../python/story.json');
+        const jsonData = fs.readFileSync(storyFilePath, 'utf8');
+        const storyObject = JSON.parse(jsonData);
+        const title = storyObject.title;
+        return res.status(200).send({ title });
+    } catch (error) {
+        console.error('Error while getting title:', error);
+        return res.status(500).send('Error getting tile:', error.message);
     }
 };
 
 module.exports = {
     uploadImages,
     readImages,
-    uploadSettings
+    uploadSettings,
+    storyReady,
+    getStory,
+    getImage,
+    getTitle
 };
