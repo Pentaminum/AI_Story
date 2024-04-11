@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
-const { uploadImages, uploadSettings, readImages, storyReady, getStory, getImage, getTitle} = require('./src/controllers/fileController');
+const { uploadImages, uploadSettings, generateImage, readImages, readPrompts, storyReady, getStory, getImage, getTitle} = require('./src/controllers/fileController');
+const { generateStory } = require('./src/controllers/chatGptController');
 
 const app = express();
 app.use(cors());
@@ -18,13 +19,16 @@ app.get('/', (req, res) => {
 app.post('/upload/images', uploadImages);
 app.post('/upload/settings', uploadSettings);
 
-// text -> image // image -> text
-app.get('/read/images', readImages); // will only be used for testing
+// generate images
+app.get('/generate/images', generateImage);
+
+// // text -> image // image -> text
+// app.get('/read/images', readImages); // will only be used for testing
 // app.get('/read/prompts', readPrompts); // will only be used for testing
 
 // get story, image, title
-app.get('/story/:num', getStory);
-app.get('/image/:num', getImage);
+app.get('/storynum/:num', getStory);
+app.get('/imagenum/:num', getImage);
 app.get('/title', getTitle);
 
 // check if the story is ready

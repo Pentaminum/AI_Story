@@ -62,3 +62,4 @@ def delete_images(img_folder):
 
 if __name__ == '__main__':
     process_images()
+    print("Image to text worked")

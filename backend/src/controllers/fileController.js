@@ -40,6 +40,20 @@ const readImages = async () => {
     }
 };
 
+const readPrompts = async () => {
+    try {
+        const options = {
+            scriptPath: path.join(__dirname, '../../python/'),
+        };
+
+        const result = await PythonShell.run('a2.py', options);
+        return result;
+
+    } catch (error) {
+        return error;
+    }
+};
+
 const uploadSettings = async (req, res) => {
     try {
         const result = await readImages();
@@ -89,12 +103,35 @@ const uploadSettings = async (req, res) => {
     }
 };
 
+const generateImage = async (req, res) => {
+    try{
+        const result = await readPrompts();
+        return res.status(200).send(result);
+    } catch (error) {
+        res.status(400).json({
+            message: ("Error while generating images: ", error.message)
+    })
+}
+};
+
 const storyReady = async (req, res) => {
     try {
+        // check if images are generated = means story is ready
+        const imageFilePath = path.join(__dirname, '../../python/ai_generated_images');
+        const files = fs.readdirSync(imageFilePath);
+
+        // Check if there are 3 image files
+        const requiredImages = ['image_0.png', 'image_1.png', 'image_2.png'];
+        const existingImages = files.filter(file => requiredImages.includes(file));
+        if (existingImages.length === requiredImages.length) {
+            return res.status(200).send('Success');
+        } else {
+            return res.status(400).send('Fail');
+        }
 
     } catch (error) {
-        console.error('Error while getting story:', error);
-        return res.status(500).send('Error getting story:', error.message);
+        console.error('Error while checking story status:', error);
+        return res.status(500).send('Error checking story status:', error.message);
     }
 };
 
@@ -159,7 +196,9 @@ const getTitle = async (req, res) => {
 module.exports = {
     uploadImages,
     readImages,
+    readPrompts,
     uploadSettings,
+    generateImage,
     storyReady,
     getStory,
     getImage,

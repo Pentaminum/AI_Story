@@ -59,4 +59,6 @@ def delete_images(img_folder):
                     
 
 # testing
-generate_image()
+if __name__ == '__main__':
+    generate_image()
+    print("Text to image worked")

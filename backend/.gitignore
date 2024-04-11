@@ -25,3 +25,5 @@ yarn-error.log*
 
 /python/user_uploaded_images
 /python/ai_generated_images
+/python/img_prompts.json
+/python/story.json
