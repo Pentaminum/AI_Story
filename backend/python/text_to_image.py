@@ -19,8 +19,6 @@ pipe.to("cpu")
 # pipe.enable_xformers_memory_efficient_attention()
 
 
-# the specified maximum token indices sequence length for this model is 77, make sure our json prompt is within this limit
-# otherwise, part of our input will be truncated because CLIP can only handle sequences up to 77 token
 def generate_image():
     # get the path of the current py file
     current_dir = os.path.dirname(os.path.abspath(__file__))
