@@ -57,9 +57,6 @@ def delete_images(img_folder):
             print(f"Failed to delete {filename}: {e}")
                     
 
-# # testing
-# process_images()
-
 if __name__ == '__main__':
     process_images()
     print("Image to text worked")

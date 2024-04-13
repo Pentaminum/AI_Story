@@ -58,7 +58,6 @@ def delete_images(img_folder):
             print(f"Failed to delete {filename}: {e}")
                     
 
-# testing
 if __name__ == '__main__':
     generate_image()
     print("Text to image worked")
