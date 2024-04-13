@@ -32,7 +32,7 @@ const readImages = async () => {
             scriptPath: path.join(__dirname, '../../python/'),
         };
 
-        const result = await PythonShell.run('a.py', options);
+        const result = await PythonShell.run('image_to_text.py', options);
         return result;
 
     } catch (error) {
@@ -46,7 +46,7 @@ const readPrompts = async () => {
             scriptPath: path.join(__dirname, '../../python/'),
         };
 
-        const result = await PythonShell.run('a2.py', options);
+        const result = await PythonShell.run('text_to_image.py', options);
         return result;
 
     } catch (error) {
